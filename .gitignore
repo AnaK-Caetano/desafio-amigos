@@ -1,0 +1,77 @@
+# Default ignored files
+/.idea/shelf/
+/.idea/workspace.xml
+
+### Geral / Build ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/build
+!**/src/main/**/build/
+!**/src/test/**/build/
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+### Node ###
+/node_modules
+npm-debug.log
+yarn-error.log
+
+### IDEs e Editores ###
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+/workspace.xml
+/shelf/
+
+# Eclipse/STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+.history/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Outros IDEs
+.c9/
+*.launch
+*.sublime-workspace
+
+
+### Diretórios Específicos ###
+/workflow/
+/frontend/.vscode/
+
+### Arquivos de Sistema ###
+.DS_Store
+Thumbs.db
+
+### Docker ###
+docker-compose.override.yml
