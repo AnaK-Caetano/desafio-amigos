@@ -64,9 +64,14 @@ yarn-error.log
 *.launch
 *.sublime-workspace
 
+
+### Diretórios Específicos ###
+/workflow/
+/frontend/.vscode/
+
 ### Arquivos de Sistema ###
 .DS_Store
 Thumbs.db
 
-### Diretórios Específicos ###
-/workflow/
+### Docker ###
+docker-compose.override.yml

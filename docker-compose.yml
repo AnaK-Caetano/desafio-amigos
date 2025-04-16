@@ -7,7 +7,9 @@ services:
       - '4200:4200'       # ambiente de desenvolvimento (ng serve)
       # - "80:80"         # ambiente de prod (nginx)
     volumes:
-      - ./frontend/src:/appDesafioAmigos/src 
+      - ./frontend:/app 
+      - /app/node_modules
+    working_dir: /app
     command: ng serve --host 0.0.0.0
     stdin_open: true
     networks:
