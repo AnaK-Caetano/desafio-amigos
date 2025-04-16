@@ -118,7 +118,7 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-FIQW4UTR.js";
+} from "./chunk-TAFR5O5T.js";
 
 // node_modules/@angular/common/fesm2022/dom_tokens-rA0ACyx7.mjs
 var DOCUMENT = new InjectionToken(ngDevMode ? "DocumentToken" : "");
@@ -3725,7 +3725,7 @@ var PlatformNavigation = class _PlatformNavigation {
 })();
 
 // node_modules/@angular/common/fesm2022/common.mjs
-var VERSION = new Version("19.2.6");
+var VERSION = new Version("19.2.7");
 var ViewportScroller = class _ViewportScroller {
   // De-sugared tree-shakable injection
   // See #23917
@@ -4135,9 +4135,8 @@ var PreconnectLinkChecker = class _PreconnectLinkChecker {
   }
   queryPreconnectLinks() {
     const preconnectUrls = /* @__PURE__ */ new Set();
-    const selector = "link[rel=preconnect]";
-    const links = Array.from(this.document.querySelectorAll(selector));
-    for (let link of links) {
+    const links = this.document.querySelectorAll("link[rel=preconnect]");
+    for (const link of links) {
       const url = getUrl(link.href, this.window);
       preconnectUrls.add(url.origin);
     }
@@ -4177,6 +4176,7 @@ var PRELOADED_IMAGES = new InjectionToken(typeof ngDevMode === "undefined" || ng
 var PreloadLinkCreator = class _PreloadLinkCreator {
   preloadedImages = inject(PRELOADED_IMAGES);
   document = inject(DOCUMENT);
+  errorShown = false;
   /**
    * @description Add a preload `<link>` to the `<head>` of the `index.html` that is served from the
    * server while using Angular Universal and SSR to kick off image loads for high priority images.
@@ -4194,10 +4194,9 @@ var PreloadLinkCreator = class _PreloadLinkCreator {
    * @param sizes The value of the `sizes` attribute passed in to the `<img>` tag
    */
   createPreloadLinkTag(renderer, src, srcset, sizes) {
-    if (ngDevMode) {
-      if (this.preloadedImages.size >= DEFAULT_PRELOADED_IMAGES_LIMIT) {
-        throw new RuntimeError(2961, ngDevMode && `The \`NgOptimizedImage\` directive has detected that more than ${DEFAULT_PRELOADED_IMAGES_LIMIT} images were marked as priority. This might negatively affect an overall performance of the page. To fix this, remove the "priority" attribute from images with less priority.`);
-      }
+    if (ngDevMode && !this.errorShown && this.preloadedImages.size >= DEFAULT_PRELOADED_IMAGES_LIMIT) {
+      this.errorShown = true;
+      console.warn(formatRuntimeError(2961, `The \`NgOptimizedImage\` directive has detected that more than ${DEFAULT_PRELOADED_IMAGES_LIMIT} images were marked as priority. This might negatively affect an overall performance of the page. To fix this, remove the "priority" attribute from images with less priority.`));
     }
     if (this.preloadedImages.has(src)) {
       return;
@@ -8369,9 +8368,15 @@ var HttpResourceImpl = class extends ResourceImpl {
               break;
           }
         },
-        error: (error) => send({
-          error
-        }),
+        error: (error) => {
+          if (error instanceof HttpErrorResponse) {
+            this._headers.set(error.headers);
+            this._statusCode.set(error.status);
+          }
+          send({
+            error
+          });
+        },
         complete: () => {
           if (resolve) {
             send({
@@ -9282,7 +9287,7 @@ function provideClientHydration(...features) {
   }
   return makeEnvironmentProviders([typeof ngDevMode !== "undefined" && ngDevMode ? provideZoneJsCompatibilityDetector() : [], withDomHydration(), featuresKind.has(HydrationFeatureKind.NoHttpTransferCache) || hasHttpTransferCacheOptions ? [] : withHttpTransferCache({}), providers]);
 }
-var VERSION2 = new Version("19.2.6");
+var VERSION2 = new Version("19.2.7");
 
 export {
   DOCUMENT,
@@ -9333,79 +9338,79 @@ export {
 
 @angular/common/fesm2022/dom_tokens-rA0ACyx7.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/common/fesm2022/location-DpBxd_aX.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/common/fesm2022/common_module-CBrzkrmd.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/common/fesm2022/xhr-BfNfxNDv.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/common/fesm2022/platform_navigation-B45Jeakb.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/common/fesm2022/common.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/platform-browser/fesm2022/dom_renderer-DGKzginR.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/platform-browser/fesm2022/browser-X3l5Bmdq.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/common/fesm2022/module-BHk9jdTn.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/common/fesm2022/http.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/platform-browser/fesm2022/platform-browser.mjs:
   (**
-   * @license Angular v19.2.6
+   * @license Angular v19.2.7
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-QUTCY5GA.js.map
+//# sourceMappingURL=chunk-TAHDP6RL.js.map
