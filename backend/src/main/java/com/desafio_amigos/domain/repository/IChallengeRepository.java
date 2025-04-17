@@ -1,0 +1,11 @@
+package com.desafio_amigos.domain.repository;
+
+import com.desafio_amigos.domain.entity.ChallengeEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface IChallengeRepository extends JpaRepository<ChallengeEntity, Long> {
+
+    @Query(value = "SELECT * FROM tb_challenge ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    ChallengeEntity findRandomChallenge();
+}
