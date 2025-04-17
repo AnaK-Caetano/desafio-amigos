@@ -12,7 +12,7 @@
 
 ## 📌 Sobre o Projeto  
 Plataforma de desafios de código onde usuários podem:  
-- **Treinar diariamente** (estilo Duolingo) com problemas pré-definidos.  
+- **Treinar diariamente** com problemas pré-definidos.  
 - **Criar partidas rápidas** com amigos, competindo por tempo de submissão.  
 
 ---
@@ -24,7 +24,7 @@ Plataforma de desafios de código onde usuários podem:
 - 📤 Submissão de código **sem validação automática**.  
 
 ### ⚡ Partida Rápida  
-- 🎮 Geração de código de sala único (UUID).  
+- 🎮 Geração de código de sala único.  
 - 🏁 Ranking por tempo de submissão (quem envia primeiro ganha).  
 - 🚫 **Sem necessidade de login** (acesso via código da sala).  
 
@@ -32,35 +32,35 @@ Plataforma de desafios de código onde usuários podem:
 
 ## 📐 Diagrama de Classes  
 ```mermaid  
-classDiagram  
-    class Usuario {  
-        +UUID id  
-        +String username  
-        +String password  
-        +List<Submissao> submissoes  
-    }  
+classDiagram
+    class User {
+        +Long id
+        +String username
+        +String password
+        +List<Submission> submissions
+    }
 
-    class DesafioDiario {  
-        +UUID id  
-        +LocalDate data  
-        +String descricao  
-        +String codigoCorreto  
-    }  
+    class DailyChallenge {
+        +Long id
+        +LocalDate date
+        +String description
+        +String correctCode
+    }
 
-    class PartidaRapida {  
-        +String codigo  
-        +LocalDateTime dataCriacao  
-    }  
+    class QuickMatch {
+        +String code
+        +LocalDateTime creationDate
+    }
 
-    class Submissao {  
-        +UUID id  
-        +String codigoSubmetido  
-        +LocalDateTime data  
-        +Usuario usuario  
-        +DesafioDiario desafio  
-        +String codigoSala  
-    }  
+    class Submission {
+        +Long id
+        +String submittedCode
+        +LocalDateTime date
+        +User user
+        +DailyChallenge challenge
+        +String roomCode
+    }
 
-    Usuario "1" -- "*" Submissao : Realiza  
-    DesafioDiario "1" -- "*" Submissao : Tem  
-    PartidaRapida "1" -- "*" Submissao : Tem  
+    User "1" -- "*" Submission : Makes
+    DailyChallenge "1" -- "*" Submission : Has
+    QuickMatch "1" -- "*" Submission : Has
