@@ -1,0 +1,58 @@
+services:
+  # ----Frontend
+  client:
+    build:
+      context: ./frontend
+    ports:
+      - '4200:4200'       # ambiente de desenvolvimento (ng serve)
+      # - "80:80"         # ambiente de prod (nginx)
+    volumes:
+      - ./frontend:/app 
+      - /app/node_modules
+    working_dir: /app
+    command: ng serve --host 0.0.0.0
+    stdin_open: true
+    networks:
+      - desafio-amigos-net
+
+  # ----Backend
+  api-application:
+      build:
+        context: ./backend   
+      command: bash start-dev.sh
+      ports:
+        - "8080:8080"
+        # - "5005:5005"
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/desafio_amigos_db
+        SPRING_DATASOURCE_USERNAME: desafio_user
+        SPRING_DATASOURCE_PASSWORD: desafio9090
+        SPRING_PROFILES_ACTIVE: dev
+      volumes:
+        - ./backend:/desafio-amigos-api 
+      depends_on:
+        - db
+      networks:
+        - desafio-amigos-net
+
+  # ----Database
+  db:
+    image: postgres:17.2
+    environment:
+      POSTGRES_DB: desafio_amigos_db
+      POSTGRES_USER: desafio_user
+      POSTGRES_PASSWORD: desafio9090
+    ports:
+      - "5432:5432"
+    networks:
+      - desafio-amigos-net
+    volumes:
+      - db:/var/lib/postgresql/data 
+
+  # ----Rede de comunicação entre containers
+networks:
+  desafio-amigos-net:
+    name: desafio-amigos-net
+
+volumes:
+  db:
